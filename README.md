@@ -24,7 +24,7 @@ To start a consensus, you must use the `sendPrepare` function and give the Paxos
   "inboxArray": ["list of", "inboxes of all acceptors"]
 }
 ```
-Furthermore, the value to be agreed upon should be stored in `${id}|${instance}|value to accept`.
+Furthermore, the value to be agreed upon should be stored in `${name}|${instance}|value to accept`.
 
 This library will then exchange messages with the acceptors automatically (via the cronjobs) until user interaction is required to accept or reject the value.
 

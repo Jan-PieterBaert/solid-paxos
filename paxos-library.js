@@ -54,30 +54,30 @@ export async function getPaxosMessage(content, url) {
         // TODO: add null check for each of the fields
         let retval = {
             url: url,
-            type: data["@type"][0]?.split("http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#")[1],
-            instance: data["http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#instance"]?.map(
+            type: data["@type"][0]?.split("https://purl.org/paxos#")[1],
+            instance: data["https://purl.org/paxos#instance"]?.map(
                 (i) => i["@value"]
             )[0],
-            round: data["http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#round"]?.map(
+            round: data["https://purl.org/paxos#round"]?.map(
                 (i) => i["@value"]
             )[0],
             id: id,
-            acceptors: data["http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#acceptors"]?.map(
+            acceptors: data["https://purl.org/paxos#acceptors"]?.map(
                 (i) => i["@value"]
             ),
-            proposer: data["http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#proposer"]?.map(
+            proposer: data["https://purl.org/paxos#proposer"]?.map(
                 (i) => i["@value"]
             ),
-            from: data["http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#from"]?.map(
+            from: data["https://purl.org/paxos#from"]?.map(
                 (i) => i["@value"]
             )[0],
-            value: data["http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#value"]?.map(
+            value: data["https://purl.org/paxos#value"]?.map(
                 (i) => i["@value"]
             )[0],
-            accepted: data["http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#acceptedStatus"]?.map(
+            accepted: data["https://purl.org/paxos#acceptedStatus"]?.map(
                 (i) => i["@value"]
             )[0],
-            ackKey: data["http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#ackKey"]?.map(
+            ackKey: data["https://purl.org/paxos#ackKey"]?.map(
                 (i) => i["@value"]
             )[0],
         };
@@ -192,7 +192,7 @@ async function sendAck(element) {
         "@context": [
             "https://www.w3.org/ns/activitystreams",
             {
-                paxos: "http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#"
+                paxos: "https://purl.org/paxos#"
             },
         ],
         "@id": element.id,
@@ -237,7 +237,7 @@ export async function sendPrepare(element) {
             "@context": [
                 "https://www.w3.org/ns/activitystreams",
                 {
-                    paxos: "http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#"
+                    paxos: "https://purl.org/paxos#"
                 },
             ],
             "@id": element.id,
@@ -278,7 +278,7 @@ export async function answerToPrepare(element) {
             "@context": [
                 "https://www.w3.org/ns/activitystreams",
                 {
-                    paxos: "http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#"
+                    paxos: "https://purl.org/paxos#"
                 },
             ],
             "@id": element.id,
@@ -326,7 +326,7 @@ export async function answerToPromise(element) {
             "@context": [
                 "https://www.w3.org/ns/activitystreams",
                 {
-                    paxos: "http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#"
+                    paxos: "https://purl.org/paxos#"
                 },
             ],
             "@id": element.id,
@@ -374,7 +374,7 @@ export async function createAccepted(element, accepted) {
         "@context": [
             "https://www.w3.org/ns/activitystreams",
             {
-                paxos: "http://www.semanticweb.org/jan-pieter/ontologies/2023/2/paxos-ontology#"
+                paxos: "https://purl.org/paxos#"
             },
         ],
         "@id": element.id,
