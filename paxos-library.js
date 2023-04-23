@@ -362,7 +362,7 @@ export async function processAccept(element) {
     await deleteInboxElem(element.url);
 }
 export async function createAccepted(element, accepted) {
-    console.debug("CREATED ACCEPTED MESSAGE WITH VALUE", element.value);
+    console.debug("CREATED ACCEPTED MESSAGE WITH VALUE", element.value, accepted);
     let key = getKeyFromElement(element);
     let data = JSON.parse(localStorage.getItem(key)) || {
         lastPromised: -Infinity
@@ -503,14 +503,16 @@ export function outboxCron() {
 }
 
 async function sendElement(element) {
-    fetch(element.url, {
-        method: "POST",
-        cors: "cors",
-        headers: {
-            "Content-Type": "application/ld+json",
-        },
-        body: JSON.stringify(element.data),
-    });
+    if (element.url) {
+        fetch(element.url, {
+            method: "POST",
+            cors: "cors",
+            headers: {
+                "Content-Type": "application/ld+json",
+            },
+            body: JSON.stringify(element.data),
+        });
+    }
 }
 
 async function sendOutboxElements() {
