@@ -6,7 +6,7 @@
     "jsonld": "^8.1.1"
   },
   "name": "solid-paxos",
-  "version": "0.0.6",
+  "version": "0.0.7-pre",
   "description": "Solid library to execute a Paxos protocol using LDN",
   "main": "paxos-library.js",
   "devDependencies": {},
