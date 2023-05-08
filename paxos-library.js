@@ -7,10 +7,6 @@ import {
     QueryEngine
 } from "@comunica/query-sparql-solid";
 
-// TODO: add documentation to every function
-// TODO: make it typescript?
-// TODO: Add Nack
-
 /**
  * Delete an element in the inbox specified by the url
  */
@@ -51,7 +47,6 @@ export async function getPaxosMessage(content, url) {
         let id = data["@id"];
         data = data[orgNsActivitystreamsObject][0];
         console.debug(data);
-        // TODO: add null check for each of the fields
         let retval = {
             url: url,
             type: data["@type"][0]?.split("https://purl.org/paxos#")[1],
@@ -196,7 +191,7 @@ async function sendAck(element) {
             },
         ],
         "@id": element.id,
-        "@type": "Object",
+        "@type": "Read",
         object: {
             "@type": "paxos:Ack",
             "paxos:instance": element.instance,
@@ -241,7 +236,7 @@ export async function sendPrepare(element) {
                 },
             ],
             "@id": element.id,
-            "@type": "Object",
+            "@type": "Announce",
             object: {
                 "@type": "paxos:Prepare",
                 "paxos:instance": element.instance,
@@ -282,7 +277,7 @@ export async function answerToPrepare(element) {
                 },
             ],
             "@id": element.id,
-            "@type": "Object",
+            "@type": "Listen",
             object: {
                 "@type": "paxos:Promise",
                 "paxos:instance": element.instance,
@@ -330,7 +325,7 @@ export async function answerToPromise(element) {
                 },
             ],
             "@id": element.id,
-            "@type": "Object",
+            "@type": "Offer",
             object: {
                 "@type": "paxos:Accept",
                 "paxos:instance": element.instance,
@@ -378,7 +373,7 @@ export async function createAccepted(element, accepted) {
             },
         ],
         "@id": element.id,
-        "@type": "Object",
+        "@type": accepted ? "Accept" : "Reject",
         object: {
             "@type": "paxos:Accepted",
             "paxos:instance": element.instance,
@@ -450,7 +445,6 @@ let inboxJob;
 export function inboxCron() {
     if (!inboxCronStarted) {
         console.debug("INBOX CRON STARTED");
-        // TODO: fix cronjob timing
         inboxJob = cron.job(
             "*/5 * * * * *",
             async function() {
@@ -476,7 +470,6 @@ async function checkInboxElements() {
             await processInboxElem(inboxElement);
         }
     }
-    // TODO: fix inbox checking
 }
 
 let outboxCronStarted = false;
@@ -487,7 +480,6 @@ let outboxJob;
 export function outboxCron() {
     if (!outboxCronStarted) {
         console.debug("OUTBOX CRON STARTED");
-        // TODO: fix cronjob timing
         outboxJob = cron.job(
             "*/10 * * * * *",
             async function() {
